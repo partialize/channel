@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release'
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test
