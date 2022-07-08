@@ -10,9 +10,9 @@ test('namespace', async () => {
 
   const randomNamespace = faker.name.findName();
 
-  const socket = await createClient(config, randomNamespace);
+  await createClient(config, `/${randomNamespace}`);
   expect(io._nsps.size).toEqual(2);
 
-  socket.disconnect();
-  expect(io._nsps.size).toEqual(1);
+  await createClient(config, `/${randomNamespace}`);
+  expect(io._nsps.size).toEqual(2);
 });
