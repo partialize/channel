@@ -23,10 +23,15 @@ async function bootstrap(
     io.adapter(createAdapter(pubClient, subClient));
   }
 
-  const space = io.of('/');
+  const spaces = [io.of('/'), io.of(/.*?/)];
 
-  space.use(age(io, config.age));
-  space.on('connection', connect());
+  const shareAge = age(io, config.age);
+  const shareConnect = connect();
+
+  spaces.forEach((space) => {
+    space.use(shareAge);
+    space.on('connection', shareConnect);
+  });
 
   if (config.port != null) {
     await io.listen(config.port);
