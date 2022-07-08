@@ -15,5 +15,8 @@ const environmentConfig: Partial<Config> = {};
 if (process.env.PORT !== undefined) {
   environmentConfig.port = Number(process.env.PORT);
 }
+if (process.env.AGE !== undefined) {
+  environmentConfig.age = Number(process.env.AGE);
+}
 
 export default environmentConfig;
