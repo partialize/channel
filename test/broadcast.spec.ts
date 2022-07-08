@@ -15,7 +15,6 @@ describe('broadcast', () => {
 
     socket1.on('hello', (arg) => {
       expect(arg).toEqual('world');
-
       done();
     });
 
@@ -33,7 +32,6 @@ describe('broadcast', () => {
 
     socket1.on('hello', (arg) => {
       expect(arg).toEqual('world');
-
       done();
     });
 

@@ -16,7 +16,6 @@ test('leave-room', wrap(async (done) => {
   socket1.on('leave-room', (room: Room, id: string) => {
     expect(room).toEqual(randomRoom);
     expect(id).toEqual(socket2.id);
-
     done();
   });
 

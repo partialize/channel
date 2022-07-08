@@ -15,7 +15,6 @@ test('join-room', wrap(async (done) => {
   socket.on('join-room', (room: Room, id: string) => {
     expect(room).toEqual(randomRoom);
     expect(id).toEqual(socket.id);
-
     done();
   });
 
