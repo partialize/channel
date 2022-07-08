@@ -17,9 +17,11 @@
     "test": "cross-env NODE_ENV=test jest --forceExit"
   },
   "dependencies": {
+    "@socket.io/redis-adapter": "^7.2.0",
     "conev-sync": "^1.0.5",
     "dotenv": "^16.0.1",
     "node-cron": "^3.0.1",
+    "redis": "^4.2.0",
     "socket.io": "^4.5.1",
     "socket.io-adapter": "^2.4.0",
     "uuid": "^8.3.2"

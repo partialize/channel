@@ -18,5 +18,8 @@ if (process.env.PORT !== undefined) {
 if (process.env.AGE !== undefined) {
   environmentConfig.age = Number(process.env.AGE);
 }
+if (process.env.REDIS_URL !== undefined) {
+  environmentConfig.redis = { url: process.env.REDIS_URL };
+}
 
 export default environmentConfig;
