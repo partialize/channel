@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "collectCoverage": true,
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "transformIgnorePatterns": [
+    "node_modules/get-port"
+  ],
+  "testRegex": "\\.spec\\.ts$",
+  "moduleFileExtensions": [
+    "js",
+    "ts"
+  ]
+}
