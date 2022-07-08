@@ -12,8 +12,8 @@ if (process.env.NODE_ENV != null) {
 }
 
 const environmentConfig: Partial<Config> = {};
-if (process.env.PORT !== undefined) {
-  environmentConfig.port = Number(process.env.PORT);
+if (process.env.NODE_PORT !== undefined) {
+  environmentConfig.port = Number(process.env.NODE_PORT);
 }
 if (process.env.AGE !== undefined) {
   environmentConfig.age = Number(process.env.AGE);
