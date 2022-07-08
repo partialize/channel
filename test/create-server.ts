@@ -6,6 +6,7 @@ import { bootstrap, ConfigProvider, Config } from '../src';
 async function createServer(): Promise<[Server, Config]> {
   const configProvider = new ConfigProvider({
     port: await getPort(),
+    redis: undefined,
   });
   const config = configProvider.get();
   return [await bootstrap(config), config];

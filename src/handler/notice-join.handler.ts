@@ -1,9 +1,9 @@
-import { Server } from 'socket.io';
+import { Namespace } from 'socket.io';
 import { Room } from 'socket.io-adapter';
 
-function noticeJoin(io: Server) {
+function noticeJoin(space: Namespace) {
   return (room: Room, id: string) => {
-    io.to(room).emit('join-room', room, id);
+    space.to(room).emit('join-room', room, id);
   };
 }
 

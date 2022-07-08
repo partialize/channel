@@ -4,7 +4,7 @@ import { Server } from 'socket.io';
 import { createAdapter } from '@socket.io/redis-adapter';
 
 import Config, { ConfigProvider } from './config';
-import { connect, noticeJoin, noticeLeave } from './handler';
+import { connect } from './handler';
 import { age } from './middleware';
 
 async function bootstrap(
@@ -23,12 +23,10 @@ async function bootstrap(
     io.adapter(createAdapter(pubClient, subClient));
   }
 
-  io.use(age(io, config.age));
+  const space = io.of('/');
 
-  io.on('connect', connect());
-
-  io.of('/').adapter.on('join-room', noticeJoin(io));
-  io.of('/').adapter.on('leave-room', noticeLeave(io));
+  space.use(age(io, config.age));
+  space.on('connection', connect());
 
   if (config.port != null) {
     await io.listen(config.port);

@@ -1,9 +1,9 @@
-import { Server } from 'socket.io';
+import { Namespace } from 'socket.io';
 import { Room } from 'socket.io-adapter';
 
-function noticeLeave(io: Server) {
+function noticeLeave(space: Namespace) {
   return (room: Room, id: string) => {
-    io.to(room).emit('leave-room', room, id);
+    space.to(room).emit('leave-room', room, id);
   };
 }
 
