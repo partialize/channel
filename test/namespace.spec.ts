@@ -15,4 +15,4 @@ test('namespace', async () => {
 
   socket.disconnect();
   expect(io._nsps.size).toEqual(1);
-}, 1000);
+});
