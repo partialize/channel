@@ -2,7 +2,7 @@ import { Socket  } from 'socket.io';
 import { Room } from 'socket.io-adapter';
 
 function join(socket: Socket) {
-  return (room: Room) => {
+  return (room: Room | Room[]) => {
     socket.join(room);
   };
 }

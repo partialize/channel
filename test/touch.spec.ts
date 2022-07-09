@@ -22,4 +22,4 @@ test('touch', wrap(async (done) => {
   });
 
   socket.emit('touch');
-}), 1000);
+}));
