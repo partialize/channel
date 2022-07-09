@@ -12,7 +12,7 @@ describe('join-room', () => {
 
     const socket = await createClient(config);
 
-    const randomRoom = faker.name.findName();
+    const randomRoom = faker.random.word();
 
     socket.on('join-room', (room: Room, id: string) => {
       if (room == id) {
@@ -31,8 +31,8 @@ describe('join-room', () => {
 
     const socket = await createClient(config);
 
-    const randomRoom1 = faker.name.findName();
-    const randomRoom2 = faker.name.findName();
+    const randomRoom1 = faker.random.word();
+    const randomRoom2 = faker.random.word();
 
     const call = called(2, () => done());
 

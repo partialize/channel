@@ -1,20 +1,9 @@
-/* eslint-disable @typescript-eslint/no-shadow,@typescript-eslint/no-non-null-assertion */
-import { Namespace, Server } from 'socket.io';
+/* eslint-disable @typescript-eslint/no-shadow */
+import {  Server } from 'socket.io';
 import Router from 'koa-router';
 import { BadRequest, NotFound } from 'http-errors';
 
-function fetchNamespace(io: Server, namespace: string): Namespace {
-  if (namespace == null || namespace === '') {
-    namespace = '/';
-  }
-  if (io._nsps.has(namespace)) {
-    return io._nsps.get(namespace)!;
-  }
-
-  const nsp = io.of(namespace);
-  io._nsps.delete(nsp.name);
-  return nsp;
-}
+import fetchNamespace from './fetch-namespace';
 
 function sockets(io: Server): Record<'read' | 'delete', Router.IMiddleware> {
   return {

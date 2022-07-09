@@ -4,7 +4,6 @@ import Namespaces from '../namespaces';
 
 import join from './join.handler';
 import leave from './leave.handler';
-import broadcast from './broadcast.handler';
 import noticeLeave from './notice-leave.handler';
 import noticeJoin from './notice-join.handler';
 
@@ -23,7 +22,6 @@ function connect(io: Server) {
     socket.on('join-room', join(socket));
     socket.on('leave-room', leave(socket));
 
-    socket.on('broadcast', broadcast(socket));
     socket.on('touch', () => {});
 
     namespaces.connect(socket);

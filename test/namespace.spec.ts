@@ -8,7 +8,7 @@ test('namespace', async () => {
 
   expect(io._nsps.size).toEqual(1);
 
-  const randomNamespace = faker.name.findName();
+  const randomNamespace = faker.internet.domainWord();
 
   await createClient(config, `/${randomNamespace}`);
   expect(io._nsps.size).toEqual(2);
