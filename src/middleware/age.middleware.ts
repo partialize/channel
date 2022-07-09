@@ -14,8 +14,8 @@ function age(io: Server, age: number): Middleware {
   
   return (socket, next) => {
     socket.data.age = age;
-    touch(socket);
 
+    touch(socket);
     socket.use((_, next) => {
       touch(socket);
       next();
