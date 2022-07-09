@@ -65,7 +65,7 @@ function compression() {
 const build = gulp.series(compile, compression);
 
 function watch() {
-  gulp.watch(tsconfig.include, build);
+  gulp.watch(tsconfig.include.map((include) => path.join(include, '**/*')), build);
 }
 
 exports.watch = watch
