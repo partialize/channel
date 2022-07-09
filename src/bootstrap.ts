@@ -34,7 +34,7 @@ async function bootstrap(
   const spaces = [io.of('/'), io.of(/.*?/)];
 
   const shareAge = age(io, config.age);
-  const shareConnect = connect();
+  const shareConnect = connect(io);
 
   spaces.forEach((space) => {
     space.use(shareAge);

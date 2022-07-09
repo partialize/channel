@@ -32,3 +32,30 @@ describe('GET /sockets', () => {
     expect(response.body[0].id).toEqual(socket.id);
   });
 });
+
+describe('DELETE /{namespace}/sockets/:socketId', () => {
+  test('success', async () => {
+    const [server, config] = await createServer();
+    const requester = await createRequester(server);
+
+    const randomNamespace = faker.internet.domainWord();
+    const socket = await createClient(config, `/${randomNamespace}`);
+
+    const response = await requester.delete(`/${randomNamespace}/sockets/${socket.id}`);
+    expect(response.status).toEqual(204);
+    expect(socket.connected).toBeFalsy();
+  });
+});
+
+describe('DELETE /sockets/:socketId', () => {
+  test('success', async () => {
+    const [server, config] = await createServer();
+    const requester = await createRequester(server);
+
+    const socket = await createClient(config);
+
+    const response = await requester.delete(`/sockets/${socket.id}`);
+    expect(response.status).toEqual(204);
+    expect(socket.connected).toBeFalsy();
+  });
+});

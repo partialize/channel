@@ -10,6 +10,7 @@ function rootRouter(io: Server): Router<unknown, Context> {
   const sockets = Sockets(io);
 
   router.get(/(?<namespace>.*)\/sockets/, sockets.read);
+  router.delete(/(?<namespace>.*)\/sockets\/(?<socketId>[^/]+)/, sockets.delete);
 
   return router;
 }

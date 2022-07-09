@@ -1,4 +1,4 @@
-import { Namespace, Socket } from 'socket.io';
+import { Namespace, Server, Socket } from 'socket.io';
 
 class Namespaces {
   private readonly activated = new Map<string, number>();
@@ -6,6 +6,9 @@ class Namespaces {
   private readonly connectListeners: ((nsp: Namespace, socket: Socket) => unknown)[] = [];
 
   private readonly disconnectListeners: ((nsp: Namespace, socket: Socket) => unknown)[] = [];
+
+  constructor(private readonly io: Server) {
+  }
 
   connect(socket: Socket) {
     const space = socket.nsp;
@@ -22,6 +25,8 @@ class Namespaces {
         this.disconnectListeners.forEach((listener) => {
           listener(space, socket);
         });
+        space.adapter.removeAllListeners();
+        this.io._nsps.delete(space.name);
       }
     });
   }

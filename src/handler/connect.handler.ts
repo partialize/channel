@@ -1,4 +1,4 @@
-import { Socket } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 import Namespaces from '../namespaces';
 
@@ -8,8 +8,8 @@ import broadcast from './broadcast.handler';
 import noticeLeave from './notice-leave.handler';
 import noticeJoin from './notice-join.handler';
 
-function connect() {
-  const namespaces = new Namespaces();
+function connect(io: Server) {
+  const namespaces = new Namespaces(io);
 
   namespaces.on('create', (space, socket: Socket) => {
     // Manually publish events before the listener is registered.
@@ -17,9 +17,6 @@ function connect() {
 
     space.adapter.on('join-room', noticeJoin(space));
     space.adapter.on('leave-room', noticeLeave(space));
-  });
-  namespaces.on('destroy', (space) => {
-    space.adapter.removeAllListeners();
   });
 
   return (socket: Socket) => {

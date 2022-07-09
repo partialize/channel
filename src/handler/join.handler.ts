@@ -7,10 +7,14 @@ function join(socket: Socket) {
       room = [room];
     }
 
-    const sockets = await socket.nsp.allSockets();
-    room = room.filter((it) => !sockets.has(it));
+    // Check room can be private room
+    // https://socket.io/docs/v3/server-socket-instance/
+    if (room.filter((it) => it.length === 20).length > 0) {
+      const sockets = await socket.nsp.allSockets();
+      room = room.filter((it) => !sockets.has(it));
+    }
 
-    socket.join(room);
+    await socket.join(room);
   };
 }
 
